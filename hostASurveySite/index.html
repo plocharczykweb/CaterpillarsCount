@@ -1,0 +1,168 @@
+<html>
+	<head>
+		<title>Host a Survey Site | Caterpillars Count!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fanwood+Text:400i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+		<link href="../css/template.css" rel="stylesheet">
+		<script src="../js/template.js"></script>
+		<script>
+			$(document).ready(function(){
+				loadBackgroundImage($("#splashImage"), "../images/splash.png");
+			});
+		</script>
+	</head>
+	<body>
+		<div id="splash">
+			<div id="splashImage"></div>
+			<div id="splashOverlay">
+				<div id="splashIntroText">Welcome to</div>
+				<div id="splashMainText">Caterpillars Count!</div>
+				<button id="splashButton" onclick="this.blur();scrollToPanel(1);">Host a Survey Site</button>
+			</div>
+		</div>
+		<header>
+			<h1><a href="../">Caterpillars Count!</a></h1>
+			<div id="hamburger" onclick="toggleNav();">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div id="navKnockDown" class="clearBoth"></div>
+			<nav class="loadingNav">
+				<ul>
+					<li onclick="accessSubMenu(this);">
+						<span>Participate</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../getStarted">Get Started</a></li>
+							<li><a href="../conductASurvey">Conduct a Survey</a></li>
+							<li><a href="../submitObservations">Submit Observations</a></li>
+							<li><a href="../hostASurveySite">Host a Survey Site</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Explore</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../mapsAndGraphs">Maps & Graphs</a></li>
+							<li><a href="../recentObservations">Recent Observations</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Learn</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../identificationSkills">Identification Skills</a></li>
+							<li><a href="../forEducators">For Educators</a></li>
+							<li><a href="../faq">FAQ</a></li>
+						</ul>
+					</li>
+					<li onclick="window.location = '../signIn';">
+						<span>Sign In</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../createNewSite">Create New Site</a></li>
+							<li><a href="../manageMySites">Manage My Sites</a></li>
+							<li><a href="../settings">Settings</a></li>
+							<li><a href="" onclick="logOut();">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<div id="navBack" onclick="resetMenu(false);">&#10094;</div>
+		</header>
+		<main>
+			<div class="panel">
+				<h2>Host a Survey Site</h2>
+				<div class="tagline">Want to host a new Caterpillars Count! site? </div>
+				
+				<div class="content">
+					<h3>Consider these questions:</h3>
+					<ol class="scrollAnimationElement fadeInOnScroll">
+						<li>Will your site have at least 10 (ideally 20 or more) survey tree locations?</li>
+						<li>Will surveys be carried out at least 5 times over the late spring and summer?</li>
+						<li>Is there an existing pool of potential participants who could share the work of conducting these surveys, or a single individual willing to dedicate the time required?</li>
+					</ol>
+							
+					<h3>If you answered yes to all these questions, here are the next steps!</h3>
+					<div  class="scrollAnimationElement fadeInOnScroll">
+						<p class="leftText" style="margin:0px 0px 10px 0px;"><a href="../signUp" class="highlighted">Register for an account</a>. You'll need to supply an email address and create a password.</p>
+						<p class="leftText scrollAnimationElement fadeInOnScroll" style="margin:10px 0px;">Once you are logged in, go to the <a href="../createNewSite" class="highlighted">Create New Site</a> page to register your own Caterpillars Count! site. You'll need to enter the following information</p>
+						<ul>
+							<li>Site name</li>
+							<li>Short description (140 characters or fewer)</li>
+							<li>Site location. Drag and drop the marker for your survey site onto the map. </li>
+							<li>Number of survey locations you expect to support (should be a multiple of 5)</li>
+							<li>Site password (You will give this out to participants/volunteers so they can submit surveys for your site. It should be different than your secret Caterpillars Count! account password; you want to give participants access to submit surveys at your site, not access to your whole Caterpillars Count! account!)</li>
+						</ul>
+						<p class="leftText" style="margin:10px 0px;">You will receive an email once you have created your site with a link to print your survey location codes. You can simply click that link, or you can manually retrieve and print your survey location codes from the <a href="../manageMySites" class="highlighted">Manage My Sites</a> page.</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel">
+				<h2>Setting Up a New Site</h2>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/vegitation.jpg');"></div>
+							</div>
+							<div class="cellDiv">
+								<h3>Establish the Monitoring Area</h3>
+								<ul class="scrollAnimationElement fadeInOnScroll">
+									<li><span class="bold">Choose an area that contains representative vegetation of the common shrubs and trees at your location.</span></li>
+									<li><span class="bold">Survey branches will be arranged in groups of 5 called "circles"</span></li>
+									<li><span class="bold">Each of the circles will be centered on a representative bush or small tree</span> that has leaves available for inspection. If working with a small area, it is okay for the circles to be close together. These circles may be arrayed in a loose grid, a line, or some combination depending on the configuration of vegetation at the site. </li>
+									<li><span class="bold">Choose a survey method.</span> Decide whether participants at your site will primarily use <a href="../conductASurvey/index.html#visualTipsPanel">visual</a> or <a href="../conductASurvey/index.html#beatSheetTipsPanel">beat sheet</a> surveys. Whichever type of survey you choose, we ask that you be consistent and conduct all surveys in the same manner.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<iframe class="video" src="https://www.youtube.com/embed/BGaDOkmIwwg?rel=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+					
+					<h3>Select Trees within the Monitoring Area</h3>
+					<div  class="scrollAnimationElement fadeInOnScroll">
+						<p class="leftText" style="margin:10px 0px;">Before you head out, you might want to bring these materials:</p>
+						<ul style="padding-left:20px;">
+							<li>Compass (to find cardinal directions)</li>
+							<li>Internet connected smart phone or tablet to use in tandem with the <a href="https://www.arborday.org/trees/whattree/" target="_blank">Arbor Day Foundation's Tree ID Guide</a></li>
+						</ul>
+						<p class="leftText" style="margin:10px 0px;">Each circle will consist of 5 survey locations.</p>
+						<p class="leftText" style="margin:10px 0px;">While the center point for a survey circle may be chosen based on subjective criteria (seems like a good general location for surveys, vegetation is representative, etc), the other 4 survey locations should ideally be located in each of the 4 cardinal directions from the center point, location A.</p>
+						<p class="italic leftText" style="margin:10px 0px;">Note: To increase comparability between sites, we will ONLY SURVEY TREES AND SHRUBS; we WILL NOT be sampling grasses and herbaceous plants.</p>
+					
+						<div style="height:300px;border-radius:4px;margin:20px 0px;background-size:contain;background-position:center;background-image:url('../images/circlesDiagram.png');"></div>
+					
+						<p class="bold leftText" style="margin:10px 0px;">In order to select these survey points, follow these steps:</p>
+						<ul style="padding-left:20px;">
+							<li>
+								<p class="leftText"><span class="bold">Select the center survey tree (red).</span> When selecting the center survey, it is important to choose a tree that can be easily surveyed. You are in search of a tree that has at least 50 leaves that measure 5cm (~2in.) in length. Therefore, choose a tree that has a relatively high abundance of leaves.</p>
+								<p class="leftText" style="margin-top:5px;">If finding 50 leaves to survey proves to be a challenge then you are probably better off choosing another tree. It is also important that the leaves are at a height that is easily accessible. Using a ladder is not a practical way to gather data, so these should be leaves that you can see at eye-level.  </p>
+							</li>
+							<li><span class="bold">Identify the 4 satellite survey trees.</span> Once you have selected the center (red) survey, walk 5 yards (approximately 6-7 steps) in one of the cardinal directions. The first plant with 50 leaves that are at least 5cm (~2in.) in length is the plant that you should survey. If there is not a plant directly in front of you, then you can use a plant that sits within 10 feet of your transect line.  If there is no suitable vegetation at 5 yards and within 10 feet, continue walking along your transect line away from the center point until you find a tree with 50 leaves. Repeat this process until you have picked out all 4 satellite trees (blue, green, yellow, purple). The colors of the 4 satellite trees can be arranged in any order.</li>
+							<li><span class="bold">Identify survey trees.</span> See the <a href="../identificationSkills/index.html#treeIDsPanel">Identification Skills</a> page for resources to help identify your survey trees to species. Species names can be entered through the <a href="../manageMySites">Manage My Sites</a> page.</li>
+							<li><span class="bold">Mark survey trees.</span> After creating a site, you'll receive an email with a link to print survey tags for that site. If you cannot find that email, retrieve and print the tags from the <a href="../manageMySites">Manage My Sites</a> page. One cheap method of weather-proofing tags is to "laminate" them with packing tape. Hang tags on the relevant survey branches in a visible location.</li>
+							<li><span class="bold">Repeat these steps</span> for each survey circle. </li>
+						</ul>
+						<p class="leftText" style="margin:10px 0px;">Now that you have established your survey trees and decided on a survey method, your site is ready to be surveyed!</p>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div>Part of the <a href="http://pheno-mismatch.org" target="_blank">Pheno Mismatch</a> project funded by the National Science Foundation</div>
+			
+			<div><img src="../images/unc.png"/></div><div>
+				<a target="_blank" href="https://www.facebook.com/Caterpillars-Count-1854259101283140/"><img src="../images/facebook.png" alt="facebook"/></a><a target="_blank" href="https://twitter.com/CaterpillarsCt"><img src="../images/twitter.png" alt="twitter"/></a>
+			</div>
+			
+			<div>Contact us: <a href="mailto:caterpillarscount@gmail.com">caterpillarscount@gmail.com</a></div>
+		</footer>
+	</body>
+</html>

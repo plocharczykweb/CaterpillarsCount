@@ -1,0 +1,219 @@
+<html>
+	<head>
+		<title>Conduct a Survey | Caterpillars Count!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fanwood+Text:400i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+		<link href="../css/template.css" rel="stylesheet">
+		<script src="../js/template.js"></script>
+		<script>
+			$(document).ready(function(){
+				loadBackgroundImage($("#splashImage"), "../images/splash.png");
+			});
+		</script>
+	</head>
+	<body>
+		<div id="splash">
+			<div id="splashImage"></div>
+			<div id="splashOverlay">
+				<div id="splashIntroText">Welcome to</div>
+				<div id="splashMainText">Caterpillars Count!</div>
+				<button id="splashButton" onclick="this.blur();scrollToPanel(1);">Conduct a Survey</button>
+			</div>
+		</div>
+		<header>
+			<h1><a href="../">Caterpillars Count!</a></h1>
+			<div id="hamburger" onclick="toggleNav();">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div id="navKnockDown" class="clearBoth"></div>
+			<nav class="loadingNav">
+				<ul>
+					<li onclick="accessSubMenu(this);">
+						<span>Participate</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../getStarted">Get Started</a></li>
+							<li><a href="../conductASurvey">Conduct a Survey</a></li>
+							<li><a href="../submitObservations">Submit Observations</a></li>
+							<li><a href="../hostASurveySite">Host a Survey Site</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Explore</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../mapsAndGraphs">Maps & Graphs</a></li>
+							<li><a href="../recentObservations">Recent Observations</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Learn</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../identificationSkills">Identification Skills</a></li>
+							<li><a href="../forEducators">For Educators</a></li>
+							<li><a href="../faq">FAQ</a></li>
+						</ul>
+					</li>
+					<li onclick="window.location = '../signIn';">
+						<span>Sign In</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../createNewSite">Create New Site</a></li>
+							<li><a href="../manageMySites">Manage My Sites</a></li>
+							<li><a href="../settings">Settings</a></li>
+							<li><a href="" onclick="logOut();">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<div id="navBack" onclick="resetMenu(false);">&#10094;</div>
+		</header>
+		<main>
+			<div class="panel">
+				<h2>Choose a Submission Method</h2>
+				<div class="centeredText" style="margin:20px 0px;">
+					<div class="captionedCircleIconDiv" style="width:300px;cursor:default;">
+						<div class="circleIcon" style="background:#4affcc;width:200px;height:200px;">
+							<div class="shadow"></div>
+							<div class="circleIconImage" style="background-image:url('../images/smartPhone.png');top:25%;height:50%;"></div>
+						</div>
+						<div class="caption">Get the <a href="../mobileAppITunes">iTunes</a> or <a href="../mobileAppGooglePlay">Android</a> app and <a href="../extra/mobileAppInstructions">learn how to use it</a></div>
+					</div>
+					
+					<div class="captionedCircleIconDiv" style="width:300px;cursor:default;">
+						<div class="circleIcon" style="background:#6ef5ff;width:200px;height:200px;">
+							<div class="shadow"></div>
+							<div class="circleIconImage" style="background-image:url('../images/document.png');top:25%;height:50%;"></div>
+						</div>
+						<div class="caption"><a href="../pdfs/paperDataSheet.pdf" target="_blank">Print out a paper data sheet</a> and <a href="../extra/paperDataSheetInstructions">learn how to use it</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="panel">
+				<h2>General Tips for Conducting Surveys</h2>
+				<div class="tagline"></div>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/generalSurveyBranches.JPG');"></div>
+							</div>
+							<div class="cellDiv">
+								<h3>Survey branches</h3>
+								<ul class="scrollAnimationElement fadeInOnScroll">
+									<li>The survey branch should have leaves at least 5 cm (2 inches) long on average.</li>
+									<li>Survey the same section of leaves every time you monitor your survey branches. An easy way to keep track of this is to survey the leaves closest to the survey tag.</li>
+									<li>The leaves you survey should be no more than 6 feet off of the ground, although the plant you survey may be much taller.</li>
+									<li>Count each individual leaflet within a compound leaf (e.g. hickory, buckeye, ash, etc.) as one leaf for the purposes of this project.</li>
+								</ul>
+							</div>
+						</div>
+					
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/generalArthropods.JPG');"></div>
+							</div>
+							<div class="cellDiv">
+								<h3>Arthropods</h3>
+								<ul class="scrollAnimationElement fadeInOnScroll">
+									<li>Make sure you are comfortable estimating lengths in millimeters.</li>
+									<li>Familiarize yourself with basic reference points, like the length of your pinky fingernail, length to first or second knuckle, etc.</li>
+									<li>Arthropod length is from <span class="bold">the head to the abdomen</span> - we don't count the length of legs or antennae.</li>
+									<li>Only report arthropods 2 mm long or longer. Don't spend time sweating the small stuff!</li>
+									<li>It's okay to call something 'UNIDENTIFIED'! Better to record it as unidentified than to not record it at all!</li>
+									<li>Taking photos of the arthropods you find is optional, but we strongly encourage <a href="https://www.inaturalist.org/observations/caterpillarscount?utf8=%E2%9C%93&q=&search_on=&quality_grade=any&reviewed=&geoprivacy=&identifications=any&captive=&place_id=&swlat=&swlng=&nelat=&nelng=&taxon_name=Butterflies+and+Moths&taxon_id=47157&day=&month=&year=&order_by=observations.id&order=desc&rank=&hrank=&lrank=&taxon_ids%5B%5D=&d1=&d2=&created_on=&site=&tdate=&list_id=&filters_open=true&view=map" target="_blank">photos of caterpillars</a>!</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<p style="margin:20px 0px;" id="HRT">...And when you do find a caterpillar, please note whether it is:</p>
+				
+				<div class="centeredText">
+					<div class="captionedCircleIconDiv" style="cursor:default;">
+						<div class="circleImage" style="margin:0px 10px;background-image:url('../images/hairy.jpg');"></div>
+						<div class="caption">Noticeably hairy or spiny</div>
+					</div>
+					
+					<div class="captionedCircleIconDiv" style="cursor:default;">
+						<div class="circleImage" style="margin:0px 10px;background-image:url('../images/leafRoll.jpg');"></div>
+						<div class="caption">In a leaf roll</div>
+					</div>
+					
+					<div class="captionedCircleIconDiv" style="cursor:default;">
+						<div class="circleImage" style="margin:0px 10px;background-image:url('../images/silkTent.jpg');"></div>
+						<div class="caption">Inside a silk tent</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="panel" id="visualTipsPanel">
+				<h2>Tips for Visual Surveys</h2>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/visualTips.JPG');transform: rotate(90deg);"></div>
+							</div>
+							<div class="cellDiv">
+								<ul class="scrollAnimationElement fadeInOnScroll">
+									<li>Be sure to check both the upper and lower sides of every leaf in your survey carefully.</li>
+									<li>Don't forget that the survey also includes the associated twigs and petioles, so scan those as well.</li>
+									<li>Many arthropods can be well camouflaged and can look just like the leaf or twig they are on - you will have to be vigilant!</li>
+									<li>When doing a survey, disturb the branch as little as possible. If you move it too much, arthropods may fall off or fly away from the leaves you are hoping to survey.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<iframe class="video" src="https://www.youtube.com/embed/aijyZikzKB8?rel=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				</div>
+			</div>
+			
+			<div class="panel" id="beatSheetTipsPanel">
+				<h2>Tips for Beat Sheet Surveys</h2>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/beatSheetTips.jpg');"></div>
+							</div>
+							<div class="cellDiv">
+								<ul class="scrollAnimationElement fadeInOnScroll">
+									<li>Hold the beat sheet directly under a branch that has ~20-100 leaves on it.</li>
+									<li>Whack the branch strongly enough to knock off arthropods, but not so strongly that twigs and leaves are damaged.</li>
+									<li>A stick between 1/2 - 1" in diameter works best.</li>
+									<li>The branch should be whacked exactly 10 times.</li>
+									<li>Hold the beat sheet in one place during all 10 whacks.</li>
+									<li>Spend at least one minute looking at your beat sheet - bugs that are small, or pale, or look like debris may not be obvious at first glance, especially if you are in poor light.</li>
+									<li>Be aware that some insects may be knocked into your beat sheet very briefly but will then fly away. Try to identify and count any arthropods that might fly away first (e.g., flies, moths, beetles) before counting the more sedentary ones.</li>
+									<li>After recording all of the arthropods that have fallen onto the sheet, count the number of leaves on the branch that were directly above your beat sheet when you were beating.</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+					<iframe class="video" src="https://www.youtube.com/embed/LrfZFeDymXg?rel=0&amp;showinfo=0" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div>Part of the <a href="http://pheno-mismatch.org" target="_blank">Pheno Mismatch</a> project funded by the National Science Foundation</div>
+			
+			<div><img src="../images/unc.png"/></div><div>
+				<a target="_blank" href="https://www.facebook.com/Caterpillars-Count-1854259101283140/"><img src="../images/facebook.png" alt="facebook"/></a><a target="_blank" href="https://twitter.com/CaterpillarsCt"><img src="../images/twitter.png" alt="twitter"/></a>
+			</div>
+			
+			<div>Contact us: <a href="mailto:caterpillarscount@gmail.com">caterpillarscount@gmail.com</a></div>
+		</footer>
+	</body>
+</html>

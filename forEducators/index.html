@@ -1,0 +1,215 @@
+<html>
+	<head>
+		<title>For Educators | Caterpillars Count!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fanwood+Text:400i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+		<link href="../css/template.css" rel="stylesheet">
+		<script src="../js/template.js"></script>
+		<script>
+			$(document).ready(function(){
+				loadBackgroundImage($("#splashImage"), "../images/splash.png");
+			});
+		</script>
+		<style>
+			.cellDiv h3{
+				margin:5px 0px;
+			}
+			
+			main .panel p.subline{
+				font-size:12px;
+				font-style:italic;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="splash">
+			<div id="splashImage"></div>
+			<div id="splashOverlay">
+				<div id="splashIntroText">Welcome to</div>
+				<div id="splashMainText">Caterpillars Count!</div>
+				<button id="splashButton" onclick="this.blur();scrollToPanel(1);">View tools for educators</button>
+			</div>
+		</div>
+		<header>
+			<h1><a href="../">Caterpillars Count!</a></h1>
+			<div id="hamburger" onclick="toggleNav();">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div id="navKnockDown" class="clearBoth"></div>
+			<nav class="loadingNav">
+				<ul>
+					<li onclick="accessSubMenu(this);">
+						<span>Participate</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../getStarted">Get Started</a></li>
+							<li><a href="../conductASurvey">Conduct a Survey</a></li>
+							<li><a href="../submitObservations">Submit Observations</a></li>
+							<li><a href="../hostASurveySite">Host a Survey Site</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Explore</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../mapsAndGraphs">Maps & Graphs</a></li>
+							<li><a href="../recentObservations">Recent Observations</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Learn</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../identificationSkills">Identification Skills</a></li>
+							<li><a href="../forEducators">For Educators</a></li>
+							<li><a href="../faq">FAQ</a></li>
+						</ul>
+					</li>
+					<li onclick="window.location = '../signIn';">
+						<span>Sign In</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../createNewSite">Create New Site</a></li>
+							<li><a href="../manageMySites">Manage My Sites</a></li>
+							<li><a href="../settings">Settings</a></li>
+							<li><a href="" onclick="logOut();">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<div id="navBack" onclick="resetMenu(false);">&#10094;</div>
+		</header>
+		<main>
+			<div class="panel">
+				<h2>Taking it to the Classroom</h2>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/e/e0/Physical_Sciences_Classroom.jpg');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<p class="leftText">A major goal of the Caterpillars Count! project is to provide a structured way for students and other interested individuals to learn more about the caterpillars and other insects that play a crucial role in our ecosystem.</p>
+								<p class="leftText">One important avenue for learning is actually participating in Caterpillars Count! surveys. We hope participants gain an appreciation for the wild things that are easily overlooked, and an appreciation for the diversity of life all around us.</p>
+								<p class="leftText">We are also very excited to promote the following additional learning experiences back in the classroom, whether or not your class is able to participate in field surveys.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel">
+				<h2>Classroom Activities</h2>
+				<div class="tagline">The first three activities below were developed by Ryan Garland and Allen Hurlbert specifically for Caterpillars Count! The remaining activities focus on concepts related to Caterpillars Count!, but were developed by other organizations.</div>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Food_web_diagram.svg/2000px-Food_web_diagram.svg.png');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="../pdfs/Arthropod%20Food%20Web%20lesson%20plan.pdf" target="_blank">Arthropod Food Web</a></h3>
+								<p class="subLine">Suggested Grades: 6 - 9</p>
+								<p>Students explore the interconnectedness of many of the organisms they encounter when they are outside.</p>
+							</div>
+						</div>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/philadelphiaVireo.jpg');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="../pdfs/Phenology%20Across%20Trophic%20Levels%20lesson%20plan.pdf" target="_blank">Phenology Across Trophic Levels</a></h3>
+								<p class="subLine">Suggested Grades: 6 - College</p>
+								<p>Students develop an understanding of the interconnectedness of the three trophic levels as they make connections between climate change and food abundances.</p>
+							</div>
+						</div>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/9/9b/Social_Network_Analysis_Visualization.png');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="https://caterpillarscount.unc.edu/assets/documents/Data%20Exploration.pdf" target="_blank">Inquiry-based learning using the Caterpillars Count! data visualization tools</a></h3>
+								<p class="subLine">Suggested Grades: 6 - College</p>
+								<p>Students explore Caterpillars Count! data using a variety of data visualization tools and guiding questions.</p>
+							</div>
+						</div>
+						
+						<hr/>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('https://www.nps.gov/common/uploads/stories/images/nri/20160211/articles/3D5F6016-1DD8-B71B-0B3B6E4AA8637930/3D5F6016-1DD8-B71B-0B3B6E4AA8637930.jpg');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="https://www.nps.gov/grsm/learn/education/upload/MSPhenology.pdf" target="_blank">Phenology</a></h3>
+								<p class="subLine">Suggested Grades: 6 - 12</p>
+								<p>Students gain practice in graphing while learning the difference between weather and climate. Note: Only pages 9 - 14 are suggested for this activity</p>
+							</div>
+						</div>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('https://c1.staticflickr.com/1/524/19545047488_7ebc828158_b.jpg');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="http://harvardforest.fas.harvard.edu/sites/harvardforest.fas.harvard.edu/files/data/k12/sy003/Vernal%20Pool%20Ruggles%202007.pdf" target="_blank">Vernal Pool Data Analysis</a></h3>
+								<p class="subLine">Suggested Grades: 4 - 6</p>
+								<p>Students enhance their graphing skills while also learning about vernal pools in the Harvard Forest.</p>
+							</div>
+						</div>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('https://static.pexels.com/photos/66268/butterfly-blue-insect-blue-morphofalter-66268.jpeg');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="http://butterfly.ucdavis.edu/education/stat2" target="_blank">How do Changes in Weather Affect Butterflies?</a></h3>
+								<p class="subLine">Suggested Grades: 9 - 12</p>
+								<p>Students practice statistical modeling while learning about the effects of weather on butterflies.</p>
+							</div>
+						</div>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/hornCaterpillar.JPG');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="../pdfs/hotOrCold.pdf" target="_blank">Do Caterpillars Eat Faster When It's Hot Or Cold?</a></h3><!--'-->
+								<p class="subLine">Suggested Grades: 6 - 8</p>
+								<p>Students expand their graphing skills while learning about the effects of temperature on Manduca sexta caterpillars.</p>
+							</div>
+						</div>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/e/ec/View_from_the_Genting_cable_car_in_misty_rainy_weather.JPG');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h3><a href="https://scied.ucar.edu/activity/weather-and-climate-data-exploration" target="_blank">Weather and Climate Data Exploration</a></h3>
+								<p class="subLine">Suggested Grades: 6 - 12</p>
+								<p>Students explore the relationship between weather and climate by graphing weather temperature data and comparing with climate averages.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div>Part of the <a href="http://pheno-mismatch.org" target="_blank">Pheno Mismatch</a> project funded by the National Science Foundation</div>
+			
+			<div><img src="../images/unc.png"/></div><div>
+				<a target="_blank" href="https://www.facebook.com/Caterpillars-Count-1854259101283140/"><img src="../images/facebook.png" alt="facebook"/></a><a target="_blank" href="https://twitter.com/CaterpillarsCt"><img src="../images/twitter.png" alt="twitter"/></a>
+			</div>
+			
+			<div>Contact us: <a href="mailto:caterpillarscount@gmail.com">caterpillarscount@gmail.com</a></div>
+		</footer>
+	</body>
+</html>

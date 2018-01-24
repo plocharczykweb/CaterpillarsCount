@@ -1,0 +1,241 @@
+<html>
+	<head>
+		<title>Get Started | Caterpillars Count!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fanwood+Text:400i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+		<link href="../css/template.css" rel="stylesheet">
+		<script src="../js/template.js"></script>
+		<script>
+			$(document).ready(function(){
+				loadBackgroundImage($("#splashImage"), "../images/splash.png");
+			});
+		</script>
+	</head>
+	<body>
+		<div id="splash">
+			<div id="splashImage"></div>
+			<div id="splashOverlay">
+				<div id="splashIntroText">Welcome to</div>
+				<div id="splashMainText">Caterpillars Count!</div>
+				<button id="splashButton" onclick="this.blur();scrollToPanel(1);">Get started</button>
+			</div>
+		</div>
+		<header>
+			<h1><a href="../">Caterpillars Count!</a></h1>
+			<div id="hamburger" onclick="toggleNav();">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div id="navKnockDown" class="clearBoth"></div>
+			<nav class="loadingNav">
+				<ul>
+					<li onclick="accessSubMenu(this);">
+						<span>Participate</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../getStarted">Get Started</a></li>
+							<li><a href="../conductASurvey">Conduct a Survey</a></li>
+							<li><a href="../submitObservations">Submit Observations</a></li>
+							<li><a href="../hostASurveySite">Host a Survey Site</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Explore</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../mapsAndGraphs">Maps & Graphs</a></li>
+							<li><a href="../recentObservations">Recent Observations</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Learn</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../identificationSkills">Identification Skills</a></li>
+							<li><a href="../forEducators">For Educators</a></li>
+							<li><a href="../faq">FAQ</a></li>
+						</ul>
+					</li>
+					<li onclick="window.location = '../signIn';">
+						<span>Sign In</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../createNewSite">Create New Site</a></li>
+							<li><a href="../manageMySites">Manage My Sites</a></li>
+							<li><a href="../settings">Settings</a></li>
+							<li><a href="" onclick="logOut();">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<div id="navBack" onclick="resetMenu(false);">&#10094;</div>
+		</header>
+		<main>
+			<div class="panel">
+				<h2>Get Started</h2>
+				<div class="tagline">To compare insect abundance over time and from one place to another, participants at Caterpillars Count! sites conduct surveys on trees and bushes.</div>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/smallCaterpillar.jpg');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<p class="leftText">A typical survey site includes 20 or more survey branches, and each one is carefully inspected for arthropods, often on a weekly or bi-weekly basis during the spring and summer. </p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="panel">
+				<h2>Two ways to get involved</h2>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/participants_counting4.jpg');" title="&copy; Chris Moses"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h4><a href="../hostASurveySite">Start up a new Caterpillars Count! site</a></h4>
+								<ul>
+									<li>A great option for environmental educators or teachers, or for dedicated individuals who are interested in carrying out many surveys in their backyard or local habitat patch. </li>
+									<li>Enlist the help of students or visitors to your site to carry out surveys!</li>
+								</ul>
+							</div>
+						</div>
+						
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/carolinaChickadee.jpg');" title="&copy; Douglas Tallamy"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<h4><a href="../mapsAndGraphs">Find an existing Caterpillars Count! site near you</a></h4>
+								<ul>
+									<li>Great if you would like to try some surveys, but don't want to commit to continued monitoring.</li>
+									<li>If there is no existing site near you, consider asking your local Environmental Education center to start one!</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+			
+				</div>
+			</div>
+				
+			<div class="panel">
+				<h2>Next Steps</h2>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/chippingSparrow_Fotor.jpg');" title="&copy; Glenn Bartley"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<p>However you get involved, you'll want to:</p>
+								<ol>
+									<li>Make sure you are familiar with the major Orders of arthropods. Review the <a href="../identificationSkills/index.html#ArthropodIDPanel" class="highlighted">Arthropod Identification page</a> and take the <a href="../arthropodQuiz" class="highlighted">online ID quiz</a> until you can get at least 9 of 10 correct.</li>
+									<li>Familiarize yourself with our <a href="../conductASurvey" class="highlighted">survey protocols</a></li>
+									<li>Download the app from <a href="../mobileAppITunes" class="highlighted">iTunes</a> or the <a href="../mobileAppGooglePlay" class="highlighted">PlayStore</a>!</li>
+									<li>Create an account by clicking <a href="../signUp" class="highlighted">here</a> or through the app.</li>
+									<li>Check out our <a href="../forEducators" class="highlighted">resources for educators</a></li>
+								</ol>
+								
+								<p style="margin-top:20px;">For more information, refer to our <a href="../faq" class="highlighted">Frequently Asked Questions</a> page!</p>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!--
+			<div class="panel">
+				<h2>Survey Basics</h2>
+				<div class="tagline">Our basic survey unit is the 50-leaf foliage survey.</div>
+				<div class="content">
+					<div>
+						<div class="imageTextTable tableDiv">
+							<div class="cellDiv">
+								<div class="circleImage" style="background-image:url('../images/getStarted.jpeg');"></div>
+							</div>
+							<div class="cellDiv scrollAnimationElement fadeInOnScroll">
+								<p>At a single bush or tree, you will carefully inspect 50 leaves - both the upper and underside surfaces - along with their associated twigs and record the type and size of the insects you observe. If you have a smartphone, you can even snap a photo and include that with the data you record!</p>
+								<p>Caterpillars can be difficult to monitor because they can be "patchy" in their distribution. You might look at a hundred leaves on a plant and not see a single one, and then on the next leaf examined you might find a motherlode of caterpillars, and beetles and aphids.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="panel">
+				<h2>Survey Prep</h3>
+				<div class="tagline">To effectively compare insect abundance from one place to another, we need to make sure we use the same survey protocol and keep track of our level of effort.</div>
+				
+				<div class="content scrollAnimationElement fadeInOnScroll">
+					<p class="leftText">Before you conduct a survey, you'll need to do the following:</p>
+					<ol>
+						<li>Find a survey site near you (new page, or listed on an existing page?) or Start a new survey site (link to Host a Survey Site)</li>
+						<li>From your site manager, find out which type of survey method, visual or beat sheet, is used at your site. Learn how to use that method to survey.</li>
+						<li>Make sure you are familiar with the major Orders of arthropods. Review the Arthropod ID Guide, and take the online quiz until you can get at least 9 of 10 correct.</li>
+						<li>Gather your equipment. The equipment you need depends on how you plan to record your data - with the mobile app or a paper datasheet. We encourage participants to use the mobile app if at all possible. It makes data collection much easier.</li>
+					</ol>
+				</div>
+				
+				<div class="centeredText" style="margin:20px 0px;">
+					<div class="circleIcon" style="background:#ffff87;margin:20px;width:100px;height:100px;">
+						<div class="shadow"></div>
+						<div class="circleIconImage" style="background-image:url('../images/smartPhone.png');top:25%;height:50%;"></div>
+					</div>
+				
+					<div class="circleIcon" style="background:#6ef5ff;margin:20px;width:100px;height:100px;">
+						<div class="shadow"></div>
+						<div class="circleIconImage" style="background-image:url('../images/document.png');top:25%;height:50%;"></div>
+					</div>
+				
+					<div class="circleIcon" style="background:#4affcc;margin:20px;width:100px;height:100px;">
+						<div class="shadow"></div>
+						<div class="circleIconImage" style="background-image:url('../images/pencil.png');top:25%;height:50%;"></div>
+					</div>
+				
+					<div class="circleIcon" style="background:#fed136;margin:20px;width:100px;height:100px;">
+						<div class="shadow"></div>
+						<div class="circleIconImage" style="background-image:url('../images/beatSheet.png');top:25%;height:50%;"></div>
+					</div>
+				</div>
+				<p>Now you're ready to conduct your surveys!</p>
+			</div>
+			-->
+		</main>
+		<footer>
+			<div>Part of the <a href="http://pheno-mismatch.org" target="_blank">Pheno Mismatch</a> project funded by the National Science Foundation</div>
+			
+			<div><img src="../images/unc.png"/></div><div>
+				<a target="_blank" href="https://www.facebook.com/Caterpillars-Count-1854259101283140/"><img src="../images/facebook.png" alt="facebook"/></a><a target="_blank" href="https://twitter.com/CaterpillarsCt"><img src="../images/twitter.png" alt="twitter"/></a>
+			</div>
+			
+			<div>Contact us: <a href="mailto:caterpillarscount@gmail.com">caterpillarscount@gmail.com</a></div>
+		</footer>
+	</body>
+</html>

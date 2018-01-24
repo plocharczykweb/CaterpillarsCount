@@ -1,0 +1,470 @@
+<html>
+	<head>
+		<title>Arthropod Quiz | Caterpillars Count!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<style>
+			body{
+				background:#171717;
+				margin:0px;
+				font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				text-transform:uppercase;
+			}
+			
+			#startScreen{
+				background:#444;
+				position:fixed;
+				top:0px;
+				left:0px;
+				width:100%;
+				height:100%;
+				z-index:5;
+				text-align:center;
+				padding:100px 0px;
+				box-sizing:border-box;
+			}
+			
+			#startScreenTitle{
+				color:#fed136;
+				font-family: 'Kaushan Script', cursive;
+				text-transform:none;
+				font-size:50px;
+			}
+			
+			#startScreenSubtitle{
+				color:#fff;
+				font-size:20px;
+				margin-bottom:40px;
+			}
+			
+			#finalScore{
+				margin:20px 0px;
+				font-size:18px;
+				color:#eee;
+			}
+			
+			#startScreen button{
+				width:40%;
+				min-width:200px;
+				padding:10px;
+				box-sizing:border-box;
+				border:0px none transparent;
+				border-radius:100000px;
+				margin:10px;
+				font-size:20px;
+				cursor:pointer;
+				color:#fff;
+			}
+			
+			#fade{
+				cursor:pointer;
+				background:#000;
+				position:fixed;
+				top:0px;
+				left:0px;
+				width:100%;
+				height:100%;
+				z-index:4;
+				opacity:.7;
+				text-align:right;
+				color:#fff;
+				padding:20px;
+				box-sizing:border-box;
+				display:none;
+			}
+			
+			h1{
+				text-align:center;
+				padding:5px 0px;
+				font-size:14px;
+				margin:0px;
+				color:#333;
+				background:#ddd;
+				font-weight:normal;
+				position:relative;
+				z-index:3;
+				border-top:1px solid #ccc;
+			}
+			
+			.choiceContainer{
+				width:33.33%;
+				float:left;
+				padding:5px 10px;
+				box-sizing:border-box;
+			}
+			
+			.choice{
+				background:#171717;
+				border-radius:4px;
+				padding:15px 10px;
+				box-sizing:border-box;
+				text-align:center;
+				cursor:pointer;
+				position:relative;
+				color:#aaa;
+			}
+			
+			.choice:hover{
+				background:#383838;
+				color:#fff;
+			}
+			
+			.mainChoice{
+				font-size:18px;
+			}
+			
+			.subChoice{
+				font-size:10px;
+				opacity:.7;
+			}
+			
+			.image{
+				height:100%;
+				position:absolute;
+				top:0px;
+				left:0px;
+				width:100%;
+				
+				background-image:url('https://www.toptal.com/designers/subtlepatterns/patterns/dust_scratches.png');
+				background-size:cover;
+				background-position:center;
+				opacity:.99;
+				
+				z-index:-1;
+			}
+			
+			.tint{
+				position:absolute;
+				background-color:#222;
+				z-index:-2;
+				width:100%;
+				height:100%;
+			}
+			
+			img{
+				display:block;
+				margin:auto;
+				height:350px;
+				-webkit-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.5);
+				-moz-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.5);
+				box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.5);
+			}
+			
+			.explanation{
+				position:absolute;
+				bottom:110%;
+				left:5%;
+				z-index:4;
+				width:90%;
+				background:#555;
+				color:#fff;
+				border-radius:4px;
+				padding:10px;
+				box-sizing:border-box;
+				font-size:12px;
+				text-transform:none;
+				display:none;
+				z-index:5;
+			}
+			
+			.downArrow{
+				position:absolute;
+				top:100%;
+				border:10px solid transparent;
+				border-top:10px solid #555;
+				left:50%;
+				margin-left:-10px;
+			}
+			
+			@media screen and (max-width: 900px) {
+				.choiceContainer{
+					width:50%;
+				}
+			}
+			
+			@media screen and (max-width: 750px) {
+				.choice{
+					padding:5px;
+				}
+			
+				.mainChoice{
+					font-size:13px;
+				}
+			
+				.subChoice{
+					font-size:8px;
+				}
+			}
+			
+			@media screen and (max-width: 570px) {
+				img{
+					height:300px;
+				}
+				
+				h1{
+					font-size:11px;
+				}
+			}
+			
+			@media screen and (max-width: 450px) {
+				.choiceContainer{
+					width:100%;
+					padding:2px 10px;
+					border-bottom:1px solid rgba(0,0,0,.05);
+				}
+			}
+		</style>
+		<script>
+			var currentQuestionIndex = -1;
+			var numberCorrect = 0;
+			var questions = [["https://static.inaturalist.org/photos/3297131/medium.jpg?1459878547", "Coleoptera"], ["https://static.inaturalist.org/photos/3285686/medium.jpg?1459740754", "Heteroptera"], ["https://static.inaturalist.org/photos/2254750/medium.JPG?1439339664", "Auchenorrhyncha"], ["https://static.inaturalist.org/photos/3245329/medium.JPG?1459225141", "Opiliones"], ["https://static.inaturalist.org/photos/3216215/medium.jpg?1458852346", "Coleoptera"], ["https://static.inaturalist.org/photos/2950963/medium.jpg?1454227930", "Araneae"], ["https://static.inaturalist.org/photos/2617917/medium.JPG?1446837568", "Lepidoptera larvae"], ["https://static.inaturalist.org/photos/1590335/medium.jpg?1425330543", "Orthoptera"], ["https://static.inaturalist.org/photos/2104173/medium.jpg?1436381342", "Auchenorrhyncha"], ["https://static.inaturalist.org/photos/2985908/medium.jpg?1454950250", "Heteroptera"]];
+			
+			$(document).ready(function(){
+				$(window).resize(function(){
+					fixImgWidth();
+				});
+			});
+			
+			function setImage(url){
+				$(".image").eq(0)[0].style.backgroundImage = "url('" + url + "')";
+				$(".image").eq(0)[0].style.opacity = ".5";
+				$("img").eq(0)[0].src = url;
+				fixImgWidth();
+			}
+			
+			function fixImgWidth(){
+				$("img").eq(0)[0].style.height = "";
+				$("img").eq(0)[0].style.width = "";
+				$("img").eq(0)[0].style.padding = "";
+				if($("img").eq(0)[0].clientWidth > $(window).width()){
+					var defaultHeight = $("img").eq(0)[0].clientHeight;
+					$("img").eq(0)[0].style.height = "auto";
+					$("img").eq(0)[0].style.width = "100%";
+					$("img").eq(0)[0].style.padding = (defaultHeight - $("img").eq(0)[0].clientHeight)/2 + " 0px";
+				}
+			}
+			
+			function showAnswer(choice){
+				var correct = true;
+				if($(choice).find(".subChoice").eq(0)[0].innerHTML.toLowerCase() != questions[currentQuestionIndex][1].toLowerCase()){
+					correct = false;
+					$(choice).css({backgroundColor:"#ff0000", color:"#000", zIndex:"4"});
+					$(choice).unbind("click");
+					$(choice).click(showNextQuestion);
+				}
+				
+				if(correct){
+					++numberCorrect;
+				}
+				var currentScore = Math.round(numberCorrect / (currentQuestionIndex + 1) * 100) + "%";
+				$("#currentScore").text(currentScore);
+				$("#finalScore").text("Final Score: " + currentScore);
+				$("#questionsRemaining").text(questions.length - (currentQuestionIndex + 1));
+				
+				var subChoices = $(".subChoice");
+				for(var i = 0; i < subChoices.length; i++){
+					if(subChoices.eq(i)[0].innerHTML.toLowerCase() == questions[currentQuestionIndex][1].toLowerCase()){
+						subChoices.eq(i).parent().css({backgroundColor:"#00ff00", color:"#000", zIndex:"4"});
+						subChoices.eq(i).parent().unbind("click");
+						subChoices.eq(i).parent().click(showNextQuestion);
+						subChoices.eq(i).parent().find(".explanation").eq(0).stop().fadeIn(0);
+					}
+				}
+				
+				$("#fade").stop().fadeIn(0);
+			}
+			
+			function showNextQuestion(){
+				if(++currentQuestionIndex >= questions.length){
+					$("#fade").stop().fadeOut(0);
+					$(".explanation").stop().fadeOut(0);
+					$(".choice").css({backgroundColor:"", color:"", zIndex:""});
+					$(".choice").unbind("click");
+					$(".choice").click(function(){
+						showAnswer(this);
+					});
+					currentQuestionIndex = -1;
+					numberCorrect = 0;
+					$("#startScreen").stop().fadeIn(300);
+					return false;
+				}
+				setImage(questions[currentQuestionIndex][0]);
+				$("#fade").stop().fadeOut(0);
+				$(".explanation").stop().fadeOut(0);
+				$(".choice").css({backgroundColor:"", color:"", zIndex:""});
+				$(".choice").unbind("click");
+				$(".choice").click(function(){
+					showAnswer(this);
+				});
+			}
+			
+			function startQuickplay(){
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						questions = JSON.parse(this.responseText);
+						showNextQuestion();
+						$('#startScreen').fadeOut(500);
+					}
+				};
+				xhttp.open("GET", "../../php/getArthropodQuizQuestions.php", true);
+				xhttp.send();
+			}
+		</script>
+	</head>
+	<body>
+		<header>
+			
+		</header>
+		<main>
+			<div id="startScreen">
+				<div id="startScreenTitle">Caterpillars Count!</div>
+				<div id="startScreenSubtitle">Arthropod Quiz</div>
+				<div id="finalScore"></div>
+				<button style="background:#222;margin-top:20px;" onclick="startQuickplay();">Quickplay</button>
+				<!--<button style="background:#fed136;">Log In To Save Scores</button>-->
+			</div>
+			<div id="fade" onclick="showNextQuestion();">
+				<div>CURRENT SCORE: <span id="currentScore"></span></div>
+				<div>QUESTIONS REMAINING: <span id="questionsRemaining"></span></div>
+				<div>CLICK TO PROCEED</div>
+			</div>
+			<div style="position:relative;oveflow:hidden;">
+				<div class="tint"></div>
+				<div class="image"></div>
+				<img src="#"/>
+			</div>
+			<h1>What group does this species belong to?</h1>
+			
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Ants have 3 distinct body sections and a narrow waist.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Ant</div>
+					<div class="subChoice">Formicidae</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Aphids and pysillids are quite small, usually a few millimeters at most, and are often green, yellow, orange in color.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Aphid, Psyllid</div>
+					<div class="subChoice">Sternorrhyncha</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Bees and wasps have 2 pairs of wings with the hind wings smaller than the front wings.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Bee, Wasp</div>
+					<div class="subChoice">Hymenoptera</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Beetles have a straight line down the back where the two hard wing casings meet.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Beetle</div>
+					<div class="subChoice">Coleoptera</div>
+				</div>
+			</div>
+			
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Some caterpillars are camouflaged and look like the twigs or leaves that they are found on.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Caterpillar</div>
+					<div class="subChoice">Lepidoptera Larvae</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Daddy longlegs have 8 very long legs, and they appear to have a single round body.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Daddy Longlegs</div>
+					<div class="subChoice">Opiliones</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Flies have just a single pair of membranous wings.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Fly</div>
+					<div class="subChoice">Diptera</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Grasshoppers and crickets have large hind legs for jumping.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Grasshopper, Cricket</div>
+					<div class="subChoice">Orthoptera</div>
+				</div>
+			</div>
+			
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Leafhoppers, planthoppers, and cicadas usually have a wide head relative to their body. Hoppers have wings folded tentlike over their back, while cicadas have large membranous wings.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Leafhopper, Cicada</div>
+					<div class="subChoice">Auchenorrhyncha</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Butterflies and moths have four large wings covered by fine scales.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Butterfly, Moth</div>
+					<div class="subChoice">Lepidoptera Adult</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						Spiders have 8 legs, and the abdomen is distinct from the rest of the body.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">Spider</div>
+					<div class="subChoice">Araneae</div>
+				</div>
+			</div>
+			<div class="choiceContainer">
+				<div class="choice">
+					<div class="explanation">
+						True Bugs have semi-transparent wings which partially overlap on the back making a triangle or "X" shape on the back. The often have obvious pointy "shoulders" too.
+						<div class="downArrow"></div>
+					</div>
+					<div class="mainChoice">True bug</div>
+					<div class="subChoice">Heteroptera</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			
+		</footer>
+	</body>
+</html>

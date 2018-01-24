@@ -1,0 +1,468 @@
+<html>
+	<head>
+		<title>Manage My Sites | Caterpillars Count!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Fanwood+Text:400i" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+		<link href="../css/template.css" rel="stylesheet">
+		<script src="../js/template.js"></script>
+		<style>
+			#sitesLoading{
+				background:#e6e6e6;
+				text-align:center;
+				padding:16px;
+				border-radius:4px;
+    				overflow:hidden;
+			}
+			
+			#sitesLoading img{
+				height:22px;
+			}
+			
+			.siteOperationDiv{
+				display:inline-block;
+				min-width:160px;
+				text-align:center;
+				padding:5px 10px 5px 5px;
+				border:1px solid #000;
+				border-bottom:2px solid #000;
+				border-radius:4px;
+				opacity:.4;
+				font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				text-transform:uppercase;
+				font-size:10px;
+				cursor:pointer;
+				margin:10px 0px;
+				box-sizing:border-box;
+				background:#fff;
+			}
+			
+			.siteOperationDiv .table{
+				display:table;
+				width:100%;
+			}
+			
+			.siteOperationDiv img{
+				height:16px;
+				display:table-cell;
+				vertical-align:middle;
+			}
+			
+			.siteOperationDiv .caption{
+				display:table-cell;
+				vertical-align:middle;
+				text-align:right;
+				font-weight:bold;
+			}
+			
+			.select{
+				width:100%;
+				-webkit-appearance: none;
+    				-moz-appearance: none;
+    				appearance: none;
+    				border-radius:4px;
+    				overflow:hidden;
+    				background:#fff;
+				border:1px solid #ddd;
+				border-bottom:2px solid #ddd;
+				color:#aaa;
+				box-sizing:border-box;
+				margin-top:5px;
+				cursor:pointer;
+			}
+			
+			.select{
+				padding:0px;
+				color:#aaa;
+				font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+			}
+			
+			.select .option{
+				max-height:0px;
+				overflow:hidden;
+			}
+			
+			.select .option.selected{
+				max-height:250px;
+				overflow:hidden;
+			}
+			
+			.select .option .value{
+				display:none;
+			}
+			
+			.select .option .shown{
+				padding:16px;
+				position:relative;
+				font-size:16px;
+			}
+			
+			.select .option:nth-of-type(even){
+				background:#f7f7f7;
+			}
+			
+			.select .option .shown .image{
+				height:34px;
+				width:34px;
+				background-size:contain;
+				background-repeat:no-repeat;
+				background-position:center;
+				display:inline-block;
+				opacity:.4;
+				position:absolute;
+				right:20px;
+				top:10px;
+			}
+			
+			.select .option .shown .text{
+				display:inline-block;
+			}
+			
+			
+			
+			@media screen and (max-width: 620px) {
+				main button{
+					width:100%;
+				}
+				
+				.siteOperationDiv:first-of-type{
+					margin-top:20px;
+				}
+				
+				.siteOperationDiv{
+					width:100%;
+					padding:20px 40px;
+					font-size:18px;
+					border:0px none transparent;
+					color:#fff;
+					font-weight:bold;
+					background:#fed136;
+					opacity:1;
+					border-radius:5px;
+				}
+				
+				.siteOperationDiv .table{
+					display:inline-block;
+					text-align:center;
+				}
+				
+				.siteOperationDiv .caption{
+					display:inline-block;
+				}
+				
+				.siteOperationDiv img{
+					height:30px;
+					display:none;
+				}
+			}
+		</style>
+		<script>
+			requireLogIn();
+			
+			$(document).ready(function(){
+				loadBackgroundImage($("#splashImage"), "../images/splash.png");
+				populateSites();
+			});
+			
+			function populateSites(){
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						if(this.responseText.indexOf("true") == 0){
+							var ownedSites = JSON.parse(this.responseText.replace("true|", ""));
+							
+							var htmlToAdd = "<div class=\"select\">";
+							htmlToAdd += "<div class=\"option selected\" onclick=\"selectOption(this);\">	<div class=\"value\"></div>			<div class=\"shown\"><div class=\"image\" style=\"background-image:url('../images/selectIcons/notselected.png');\"></div>		<div class=\"text\">Not selected</div></div></div>";
+							for(var i = 0; i < ownedSites.length; i++){
+								htmlToAdd += "<div class=\"option\" onclick=\"selectOption(this);\">	<div class=\"value\">" + ownedSites[i]["id"] + "</div>			<div class=\"shown\"><div class=\"image\"></div>		<div class=\"text\">" + ownedSites[i]["name"] + " (" + ownedSites[i]["location"] + ")</div></div></div>";
+								//htmlToAdd += "<option value=\"" + ownedSites[i]["id"] + "\">" + ownedSites[i]["name"] + " (" + ownedSites[i]["location"] + ")</option>";
+							}
+							htmlToAdd += "<div class=\"option\" onclick=\"window.location = '../createNewSite';\"><div class=\"shown\"><div class=\"image\" style=\"background-image:url('../images/plus.png');\"></div>		<div class=\"text italic\">CREATE NEW SITE</div></div></div>";
+							htmlToAdd += "</div>";
+							$("#sites")[0].innerHTML = htmlToAdd;
+						}
+						else{
+							var getSitesError = this.responseText.replace("false|", "");
+							queueNotice("error", getSitesError);
+							if(getSitesError == "Your log in dissolved. Maybe you logged in on another device."){
+								logOut();
+							}
+						}
+					}
+				};
+				xhttp.open("GET", "../php/getOwnedSites.php?email=" + window.localStorage.getItem("email") + "&salt=" + window.localStorage.getItem("salt"), true);
+				xhttp.send();
+			}
+			
+			function printTags(){
+				var id = getSelectValue($(".select").eq(0));
+				if(id == ""){
+					queueNotice("error", "Select a site first.");
+					return false;
+				}
+				queueNotice('alert', 'Complete or cancel print job to continue using site.');
+				setTimeout(function(){
+					window.open("../php/printPlantCodes.php?q=" + id, "_blank");
+				}, 350);
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			function toggleMaxHeight(elements){
+				//switch the max height of all elements specified as "elements" between 0px and 250px
+				elements = $(elements);
+				for(var i = 0; i < elements.length; i++){
+					if(elements.eq(i)[0].style.maxHeight != "250px"){
+						elements.eq(i).stop().animate({maxHeight:"250px"});
+					}
+					else{
+						elements.eq(i).stop().animate({maxHeight:"0px"});
+					}
+				}
+			}
+			
+			var selectToggling = false;
+			function autoOpenSelect(selectElement){
+				if(!selectToggling){
+					selectToggling = true;
+					if(getSelectValue(selectElement) == ""){
+						if($(selectElement)[0].className.indexOf("active") > -1){
+							var activeClassName = $(selectElement)[0].className.substring($(selectElement)[0].className.indexOf("active"));
+							if(activeClassName.indexOf(" ") > -1){
+								activeClassName = activeClassName.substring(0, activeClassName.indexOf(" "));
+							}
+							$(selectElement)[0].className = $(selectElement)[0].className.replace(activeClassName, "").trim();
+						}
+						$(selectElement)[0].className = $(selectElement)[0].className + " active" + (getYPosition(selectElement) - 100);
+						elements = $(selectElement).find(".option").animate({maxHeight:"250px"}, "swing", function(){selectToggling = false;});
+					}
+				}
+			}
+			
+			function selectOption(optionElement){
+				if(!selectToggling){
+					selectToggling = true;
+					//select an option in a custiom .select or open the custom .select
+					if(optionElement.parentNode.className.indexOf("active") > -1){
+						var preScrollTop = Number(optionElement.parentNode.className.replace(/\D/g, ""));
+						optionElement.parentNode.className = optionElement.parentNode.className.replace("active" + preScrollTop, "").trim();
+						$('html, body').animate({ scrollTop: preScrollTop }, 400);
+					}
+					else{
+						optionElement.parentNode.className = optionElement.parentNode.className + " active" + $(document).scrollTop();
+					}
+					
+					toggleMaxHeight($(optionElement.parentNode).find(".option"));
+					var selectedElement = $(optionElement.parentNode).find(".selected").eq(0)[0];
+					selectedElement.className = selectedElement.className.replace("selected", "").trim();
+					optionElement.className = optionElement.className + " selected";
+					$(optionElement).stop().animate({maxHeight:"250px"}, "swing", function(){selectToggling = false});
+				}
+			}
+			
+			function setSelectValue(selectElement, val){
+				//set the value of a custom .select and show the selected option
+				selectElement = $(selectElement)[0];
+				var options = selectElement.getElementsByClassName("option");
+				for(var i = 0; i < options.length; i++){
+					options[i].className = "option";
+					options[i].style.maxHeight = "0px";
+					options[i].style.overflow = "hidden";
+					if(options[i].getElementsByClassName("value")[0].innerHTML == val){
+						options[i].className = "option selected";
+						options[i].style.maxHeight = "250px";
+						options[i].style.overflow = "hidden";
+					}
+				}
+			}
+			
+			function getSelectValue(selectElement){
+				//return the value of a custom .select
+				if($(selectElement).find(".selected .value").length < 1){
+					return "";
+				}
+				return $(selectElement).find(".selected .value")[0].innerHTML;
+			}
+			
+			function getSelectText(selectElement){
+				//return the show text of a custom .select
+				return $(selectElement).find(".selected .text")[0].innerHTML;
+			}
+			
+			function getSelectTextByValue(selectElement, val){
+				//given the value of a custom .select, return that values corresponding text
+				selectElement = $(selectElement)[0];
+				var options = selectElement.getElementsByClassName("option");
+				for(var i = 0; i < options.length; i++){
+					if($(options[i]).find(".value").eq(0)[0].innerHTML == val){
+						return $(options[i]).find(".text").eq(0)[0].innerHTML;
+					}
+				}
+			}
+			
+			function getSelectValueByText(selectElement, txt){
+				//given the value of a custom .select, return that values corresponding text
+				selectElement = $(selectElement)[0];
+				var options = selectElement.getElementsByClassName("option");
+				for(var i = 0; i < options.length; i++){
+					if($(options[i]).find(".text").eq(0)[0].innerHTML == txt){
+						return $(options[i]).find(".value").eq(0)[0].innerHTML;
+					}
+				}
+			}
+			
+			function getSelectImageByText(selectElement, txt){
+				//given the value of a custom .select, return that values corresponding text
+				selectElement = $(selectElement)[0];
+				var options = selectElement.getElementsByClassName("option");
+				for(var i = 0; i < options.length; i++){
+					if($(options[i]).find(".text").eq(0)[0].innerHTML == txt){
+						bgimg = $(options[i]).find(".image").eq(0)[0].style.backgroundImage;
+						return bgimg.substring(bgimg.indexOf("(") + 1, bgimg.lastIndexOf(")")).replace(/"/g, "").replace(/'/g, "");
+						//TODO: remove this line. "
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="error" onclick="hideNotice();"></div>
+		<div id="confirmation" onclick="hideNotice();"></div>
+		<div id="alert" onclick="hideNotice();"></div>
+		<div id="promptInteractionBlock"></div>
+		<div id="noticeInteractionBlock" onclick="hideNotice();"></div>
+		<div id="confirm">
+			<div></div>
+			<div>
+				<button>OK</button>
+				<button>Cancel</button>
+				<div class="clearBoth"></div>
+			</div>
+		</div>
+		
+		<div id="splash">
+			<div id="splashImage"></div>
+			<div id="splashOverlay">
+				<div id="splashIntroText">Welcome to</div>
+				<div id="splashMainText">Caterpillars Count!</div>
+				<button id="splashButton" onclick="this.blur();scrollToPanel(1);">Manage sites</button>
+			</div>
+		</div>
+		<header>
+			<h1><a href="../">Caterpillars Count!</a></h1>
+			<div id="hamburger" onclick="toggleNav();">
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<div id="navKnockDown" class="clearBoth"></div>
+			<nav class="loadingNav">
+				<ul>
+					<li onclick="accessSubMenu(this);">
+						<span>Participate</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../getStarted">Get Started</a></li>
+							<li><a href="../conductASurvey">Conduct a Survey</a></li>
+							<li><a href="../submitObservations">Submit Observations</a></li>
+							<li><a href="../hostASurveySite">Host a Survey Site</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Explore</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../mapsAndGraphs">Maps & Graphs</a></li>
+							<li><a href="../recentObservations">Recent Observations</a></li>
+						</ul>
+					</li>
+					<li onclick="accessSubMenu(this);">
+						<span>Learn</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../identificationSkills">Identification Skills</a></li>
+							<li><a href="../forEducators">For Educators</a></li>
+							<li><a href="../faq">FAQ</a></li>
+						</ul>
+					</li>
+					<li onclick="window.location = '../signIn';">
+						<span>Sign In</span>
+						<ul onclick="event.stopPropagation();">
+							<li class="closeSubmenu" onclick="closeSubmenu(this.parentNode);"><img src="../images/arrow.png"/></li>
+							<li><a href="../createNewSite">Create New Site</a></li>
+							<li><a href="../manageMySites">Manage My Sites</a></li>
+							<li><a href="../settings">Settings</a></li>
+							<li><a href="" onclick="logOut();">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<div id="navBack" onclick="resetMenu(false);">&#10094;</div>
+		</header>
+		<main>
+			<div class="panel">
+				<h2>Manage My Sites</h2>
+				<div class="content">
+					<div id="sites">
+						<div id="sitesLoading">
+							<img src="../images/rolling.svg"/>
+						</div>
+					</div>
+					<!--
+					<button onclick="">Edit Site</button>
+					<button onclick="">Edit Survey Plants</button>
+					<button onclick="printTags();">Print Tags</button>
+					-->
+					
+					<div class="rightText">
+						<div class="siteOperationDiv" onclick="queueNotice('alert', 'The &quot;Edit Site&quot; feature is coming soon.');">
+							<div class="table">
+								<img src="../images/edit.png"/>
+								<div class="caption">Edit Site</div>
+							</div>
+						</div>
+						
+						<div class="siteOperationDiv" onclick="queueNotice('alert', 'The &quot;Edit Survey Plants&quot; feature is coming soon.');">
+							<div class="table">
+								<img src="../images/pottedPlant.png"/>
+								<div class="caption">Edit Survey Plants</div>
+							</div>
+						</div>
+						
+						<div class="siteOperationDiv" onclick="printTags();">
+							<div class="table">
+								<img src="../images/printer.png"/>
+								<div class="caption">Print Tags</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div>Part of the <a href="http://pheno-mismatch.org" target="_blank">Pheno Mismatch</a> project funded by the National Science Foundation</div>
+			
+			<div><img src="../images/unc.png"/></div><div>
+				<a target="_blank" href="https://www.facebook.com/Caterpillars-Count-1854259101283140/"><img src="../images/facebook.png" alt="facebook"/></a><a target="_blank" href="https://twitter.com/CaterpillarsCt"><img src="../images/twitter.png" alt="twitter"/></a>
+			</div>
+			
+			<div>Contact us: <a href="mailto:caterpillarscount@gmail.com">caterpillarscount@gmail.com</a></div>
+		</footer>
+	</body>
+</html>
